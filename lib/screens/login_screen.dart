@@ -10,7 +10,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -18,23 +20,46 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Form(
           key: _formKey,
           child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/image/registerIcon.png',
-                  width: 230,
+              padding: const EdgeInsets.all(20),
+              child: SingleChildScrollView(
+                  child: SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/image/registerIcon.png',
+                      width: 230,
+                    ),
+                    const SizedBox(height: 30),
+                    const Text(
+                      'لطفا اطلاعات خود را وارد کنید.',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                    const SizedBox(height: 30),
+                    CustomTextField(
+                      label: 'نام و نام خانوادگی',
+                      controller: _fullNameController,
+                      icon: 'assets/icon/email.svg',
+                      hintText: 'نریمان فلاحی',
+                    ),
+                    CustomTextField(
+                      label: 'ایمیل',
+                      controller: _emailController,
+                      icon: 'assets/icon/email.svg',
+                      hintText: 'example@gmail.com',
+                    ),
+                    CustomTextField(
+                      label: 'رمزعبور',
+                      controller: _passwordController,
+                      icon: 'assets/icon/email.svg',
+                      hintText: 'Example_@123',
+                      isPassword: true,
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 50),
-                CustomTextField(
-                  label: 'email',
-                  controller: _emailController,
-                  textAlign: TextAlign.end,
-                )
-              ],
-            ),
-          )),
+              )))),
     );
   }
 }

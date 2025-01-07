@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   final String label;
+  final String icon;
+  final String hintText;
+  final bool isPassword;
   final TextEditingController controller;
-  final TextInputType inputType;
-  final TextAlign textAlign;
 
   const CustomTextField({
     super.key,
     required this.label,
+    required this.icon,
+    required this.hintText,
+    this.isPassword = false,
     required this.controller,
-    this.inputType = TextInputType.text,
-    this.textAlign = TextAlign.right,
   });
+
+  @override
+  State<CustomTextField> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<CustomTextField> {
+  bool _isObscured = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,25 +30,49 @@ class CustomTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          label,
-          style: const TextStyle(fontSize: 16, fontFamily: 'vazirmatnR'),
+          widget.label,
+          style: const TextStyle(fontSize: 16),
         ),
         Container(
-          margin: const EdgeInsets.only(top: 5),
+          margin: const EdgeInsets.only(top: 8),
           child: TextFormField(
-            controller: controller,
-            keyboardType: inputType,
+            controller: widget.controller,
+            obscureText: widget.isPassword ? _isObscured : false,
             cursorHeight: 20,
-            textAlign: textAlign,
             style: const TextStyle(
               height: 0.5,
             ),
             decoration: InputDecoration(
+              hintText: widget.hintText,
+              prefixIcon: Padding(
+                padding: const EdgeInsets.all(12),
+                child: SvgPicture.asset(
+                  widget.icon,
+                  width: 18,
+                  height: 18,
+                ),
+              ),
+              suffixIcon: widget.isPassword
+                  ? IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _isObscured = !_isObscured;
+                        });
+                      },
+                      icon: SvgPicture.asset(
+                          !_isObscured
+                              ? 'assets/icon/eye.svg'
+                              : 'assets/icon/eye-slash.svg',
+                          width: 20,
+                          height: 20),
+                    )
+                  : null,
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
             ),
           ),
-        )
+        ),
+        const SizedBox(height: 15),
       ],
     );
   }
