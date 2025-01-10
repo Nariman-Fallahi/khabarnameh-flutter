@@ -39,6 +39,12 @@ class _MyWidgetState extends State<CustomTextField> {
             controller: widget.controller,
             obscureText: widget.isPassword ? _isObscured : false,
             cursorHeight: 20,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'مقدار این فیلد نمیتواند خالی باشد.';
+              }
+              return null;
+            },
             style: const TextStyle(
               height: 0.5,
             ),
@@ -61,8 +67,8 @@ class _MyWidgetState extends State<CustomTextField> {
                       },
                       icon: SvgPicture.asset(
                           !_isObscured
-                              ? 'assets/icon/eye.svg'
-                              : 'assets/icon/eye-slash.svg',
+                              ? 'assets/icons/eye.svg'
+                              : 'assets/icons/eye-slash.svg',
                           width: 20,
                           height: 20),
                     )
