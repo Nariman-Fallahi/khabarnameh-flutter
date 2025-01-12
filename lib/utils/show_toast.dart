@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 
-void showToastification({required String text, required ToastificationType type}) {
+void showToastification(
+    {required BuildContext context,
+    required String text,
+    required ToastificationType type}) {
   toastification.show(
+    context: context,
     type: type,
     style: ToastificationStyle.flatColored,
     showProgressBar: false,
