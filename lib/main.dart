@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:myapp/screens/login_screen.dart';
+import 'package:myapp/screens/otp_screen.dart';
 
 void main() {
   runApp(
@@ -25,10 +26,11 @@ class MyApp extends StatelessWidget {
       ],
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-          fontFamily: 'vazirmatnR'),
-      home: const LoginScreen(),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+        fontFamily: 'vazirmatnR',
+      ),
+      home: const OtpScreen(),
     );
   }
 }

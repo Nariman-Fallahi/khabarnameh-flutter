@@ -30,6 +30,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
     userRepository = UserRepository(apiService);
   }
 
+  @override
+  void dispose() {
+    _fullNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   // void registerUser() async {
   //   try {
   //     final response = await userRepository.createUser(body: {

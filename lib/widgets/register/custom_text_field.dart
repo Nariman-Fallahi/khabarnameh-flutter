@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:myapp/constants/icons.dart';
+import 'package:myapp/constants/strings.dart';
+import 'package:myapp/theme/app_text_theme.dart';
 
 class CustomTextField extends StatefulWidget {
   final String label;
@@ -31,7 +34,7 @@ class _MyWidgetState extends State<CustomTextField> {
       children: [
         Text(
           widget.label,
-          style: const TextStyle(fontSize: 16),
+          style: AppTextTheme.bodySM,
         ),
         Container(
           margin: const EdgeInsets.only(top: 8),
@@ -41,7 +44,7 @@ class _MyWidgetState extends State<CustomTextField> {
             cursorHeight: 20,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'مقدار این فیلد نمیتواند خالی باشد.';
+                return emptyFieldText;
               }
               return null;
             },
@@ -50,6 +53,7 @@ class _MyWidgetState extends State<CustomTextField> {
             ),
             decoration: InputDecoration(
               hintText: widget.hintText,
+              errorStyle: AppTextTheme.textError,
               prefixIcon: Padding(
                 padding: const EdgeInsets.all(12),
                 child: SvgPicture.asset(
@@ -65,12 +69,8 @@ class _MyWidgetState extends State<CustomTextField> {
                           _isObscured = !_isObscured;
                         });
                       },
-                      icon: SvgPicture.asset(
-                          !_isObscured
-                              ? 'assets/icons/eye.svg'
-                              : 'assets/icons/eye-slash.svg',
-                          width: 20,
-                          height: 20),
+                      icon: SvgPicture.asset(!_isObscured ? eyeIcon : eyeSlash,
+                          width: 20, height: 20),
                     )
                   : null,
               border:

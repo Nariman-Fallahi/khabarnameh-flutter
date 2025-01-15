@@ -17,7 +17,7 @@ class Footer extends StatelessWidget {
       alignment: Alignment.centerRight,
       child: Row(
         children: [
-          Text(isLoginScreen ? dontHaveAccount : alreadyHaveAccount),
+          Text(isLoginScreen ? dontHaveAccountText : alreadyHaveAccountText),
           TextButton(
             onPressed: () {
               Navigator.pushReplacement(

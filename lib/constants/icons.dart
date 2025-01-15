@@ -1,4 +1,10 @@
-const String registerIcon = 'assets/image/registerIcon.png';
+const String registerIcon = 'assets/image/register.png';
 const String userIcon = "assets/icons/user.svg";
 const String emailIcon = "assets/icons/email.svg";
 const String keyIcon = "assets/icons/key.svg";
+const String eyeIcon = "assets/icons/eye.svg";
+const String eyeSlash = "assets/icons/eye-slash.svg";
+const String otpIcon = "assets/icons/otp.svg";
+const String arrowRight = "assets/icons/arrow-right-1.svg";
+const String timerIcon = "assets/icons/timer.svg";
+const String dangerIcon = "assets/icons/danger.svg";
