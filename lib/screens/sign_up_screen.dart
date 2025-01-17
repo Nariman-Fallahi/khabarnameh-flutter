@@ -5,13 +5,10 @@ import 'package:myapp/enums/auth_enum.dart';
 import 'package:myapp/repositories/user_repository.dart';
 import 'package:myapp/services/api_service.dart';
 import 'package:myapp/services/register_user.dart';
-import 'package:myapp/utils/auth_token.dart';
-import 'package:myapp/utils/show_toast.dart';
 import 'package:myapp/widgets/register/custom_text_field.dart';
 import 'package:myapp/widgets/register/footer.dart';
 import 'package:myapp/widgets/register/header.dart';
 import 'package:myapp/widgets/register/submit_button.dart';
-import 'package:toastification/toastification.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
