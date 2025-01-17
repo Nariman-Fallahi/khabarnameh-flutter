@@ -4,6 +4,7 @@ import 'package:myapp/constants/strings.dart';
 import 'package:myapp/enums/auth_enum.dart';
 import 'package:myapp/repositories/user_repository.dart';
 import 'package:myapp/services/api_service.dart';
+import 'package:myapp/services/register_user.dart';
 import 'package:myapp/utils/auth_token.dart';
 import 'package:myapp/utils/show_toast.dart';
 import 'package:myapp/widgets/register/custom_text_field.dart';
@@ -44,40 +45,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-  void registerUser() async {
-    try {
-      setState(() {
-        isLoading = true;
-      });
-
-      final response =
-          await userRepository.register(type: AuthEnum.signup, body: {
-        'name': _fullNameController.text,
-        'email': _emailController.text,
-        'password': _passwordController.text,
-      });
-
-      setState(() {
-        isLoading = false;
-      });
-
-      saveAuthToken(
-          accessToken: response.accessToken,
-          refreshToken: response.refreshToken);
-    } catch (error) {
-      setState(() {
-        isLoading = false;
-      });
-
-      if (!mounted) return;
-
-      showToastification(
-          context: context,
-          text: error.toString(),
-          type: ToastificationType.error);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,7 +82,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       isLoading: isLoading,
                       onPressed: () {
                         if (_formKey.currentState!.validate() && !isLoading) {
-                          registerUser();
+                          registerUser(
+                              context: context,
+                              body: {
+                                'name': _fullNameController.text,
+                                'email': _emailController.text,
+                                'password': _passwordController.text,
+                              },
+                              type: AuthEnum.signup,
+                              userRepository: userRepository,
+                              onLoading: (bool value) {
+                                setState(() {
+                                  isLoading = value;
+                                });
+                              });
                         }
                       },
                     ),
