@@ -25,7 +25,7 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<CustomTextField> {
-  bool _isObscured = false;
+  bool _isObscured = true;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +45,8 @@ class _MyWidgetState extends State<CustomTextField> {
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return emptyFieldText;
+              } else if (widget.isPassword && value.length < 8) {
+                return passwordLengthText;
               }
               return null;
             },

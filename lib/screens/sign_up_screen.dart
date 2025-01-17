@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/constants/icons.dart';
 import 'package:myapp/constants/strings.dart';
+import 'package:myapp/enums/auth_enum.dart';
 import 'package:myapp/repositories/user_repository.dart';
 import 'package:myapp/services/api_service.dart';
+import 'package:myapp/utils/auth_token.dart';
+import 'package:myapp/utils/show_toast.dart';
 import 'package:myapp/widgets/register/custom_text_field.dart';
 import 'package:myapp/widgets/register/footer.dart';
 import 'package:myapp/widgets/register/header.dart';
 import 'package:myapp/widgets/register/submit_button.dart';
+import 'package:toastification/toastification.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -23,6 +27,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   late final UserRepository userRepository;
 
+  bool isLoading = false;
+
   @override
   void initState() {
     super.initState();
@@ -38,17 +44,39 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-  // void registerUser() async {
-  //   try {
-  //     final response = await userRepository.createUser(body: {
-  //       'name': _fullNameController.text,
-  //       'email': _emailController.text,
-  //       'password': _passwordController.text
-  //     });
-  //   } catch (e) {
-  //     showToastification(text: 'ارور', type: ToastificationType.error);
-  //   }
-  // }
+  void registerUser() async {
+    try {
+      setState(() {
+        isLoading = true;
+      });
+
+      final response =
+          await userRepository.register(type: AuthEnum.signup, body: {
+        'name': _fullNameController.text,
+        'email': _emailController.text,
+        'password': _passwordController.text,
+      });
+
+      setState(() {
+        isLoading = false;
+      });
+
+      saveAuthToken(
+          accessToken: response.accessToken,
+          refreshToken: response.refreshToken);
+    } catch (error) {
+      setState(() {
+        isLoading = false;
+      });
+
+      if (!mounted) return;
+
+      showToastification(
+          context: context,
+          text: error.toString(),
+          type: ToastificationType.error);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +112,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     SubmitButton(
                       formKey: _formKey,
                       label: 'ثبت نام',
+                      isLoading: isLoading,
+                      onPressed: () {
+                        if (_formKey.currentState!.validate() && !isLoading) {
+                          registerUser();
+                        }
+                      },
                     ),
                     const Footer(isLoginScreen: false)
                   ],

@@ -1,0 +1,4 @@
+enum AuthEnum {
+  signup,
+  login
+}

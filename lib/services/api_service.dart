@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static const String baseURL = '';
+  static const String baseURL = 'https://khabarnamehapi.onrender.com';
 
   Future<http.Response> post(
       {required String url,

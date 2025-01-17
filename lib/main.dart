@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:myapp/screens/login_screen.dart';
-import 'package:myapp/screens/otp_screen.dart';
+import 'package:myapp/screens/sign_up_screen.dart';
 
 void main() {
   runApp(
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'vazirmatnR',
       ),
-      home: const OtpScreen(),
+      home: const SignUpScreen(),
     );
   }
 }

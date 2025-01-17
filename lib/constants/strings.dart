@@ -3,3 +3,8 @@ const String loginHeaderText = 'لطفا اطلاعات خود را برای و�
 const String alreadyHaveAccountText = 'قبلا حساب کاربری دارید؟';
 const String dontHaveAccountText = 'حساب کاربری ندارید؟';
 const String emptyFieldText = 'مقدار این فیلد نمیتواند خالی باشد.';
+const String passwordLengthText = "رمز عبور نمیتواند از ۸ کاراکتر کمتر باشد.";
+const String fetchError = 'در دریافت اطلاعات مشکلی پیش آمد.';
+const String authError = "در انجام احراز هویت مشکلی پیش آمد.";
+const String emailAlreadyRegistered = "این حساب قبلا ایجاد شده است";
+const String accountNotFound = "حساب وارد شده یافت نشد.";

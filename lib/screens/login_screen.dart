@@ -50,10 +50,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       hintText: 'Example_@123',
                       isPassword: true,
                     ),
-                    SubmitButton(
-                      formKey: _formKey,
-                      label: 'ورود',
-                    ),
+                    // SubmitButton(
+                    //   formKey: _formKey,
+                    //   label: 'ورود',
+                    // ),
                     const Footer(isLoginScreen: true)
                   ],
                 ),
